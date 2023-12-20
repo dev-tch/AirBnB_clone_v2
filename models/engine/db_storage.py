@@ -13,9 +13,7 @@ from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker, Session
 from os import getenv
 
-all_classes = {'State': State, 'City': City,
-               'User': User, 'Place': Place,
-               'Review': Review, 'Amenity': Amenity}
+mapping_class = {'State': State, 'City': City}
 
 
 class DBStorage:
@@ -42,20 +40,16 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """Query and return all objects by class/generally"""
-        obj_dict = {}
-
-        if cls:
-            for row in self.__session.query(cls).all():
-                """ populate dict with objects from storage"""
-                obj_dict.update({'{}.{}'.
-                                format(type(cls).__name__, row.id,): row})
+        """Query all objects of the given class."""
+        if cls is None:
+            objs = []
+            for class_key, class_val in mapping_class.items():
+                objs.extend(self.__session.query(class_val).all())
         else:
-            for key, val in all_classes.items():
-                for row in self.__session.query(val):
-                    obj_dict.update({'{}.{}'.
-                                     format(type(row).__name__, row.id,): row})
-        return obj_dict
+            if isinstance(cls, str):
+                cls = eval(cls)
+            objs = self.__session.query(cls).all()
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
         """Add object to current database session"""
@@ -69,7 +63,7 @@ class DBStorage:
         """Delete obj from database session"""
         if obj:
             """determine class from obj"""
-            cls_name = all_classes[type(obj).__name__]
+            cls_name = mapping_class[type(obj).__name__]
 
             """ query class table and delete """
             self.__session.query(cls_name).\

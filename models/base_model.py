@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
-from models import storage
+import models
 
 Base = declarative_base()
 
@@ -34,8 +34,8 @@ class BaseModel:
     def save(self):
         """Updates updated_at with current time when instance is changed"""
         self.updated_at = datetime.utcnow()
-        storage.new(self)
-        storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
@@ -43,9 +43,10 @@ class BaseModel:
         dictionnary["__class__"] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        dictionnary.pop("_sa_instance_state", None)
+        if '_sa_instance_state' in dictionnary:
+            del dictionnary['_sa_instance_state']
         return dictionary
 
     def delete(self):
         """Delete the current instance from storage."""
-        storage.delete(self)
+        models.storage.delete(self)
