@@ -13,7 +13,7 @@ from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker, Session
 from os import getenv
 
-mapping_class = {'State': State, 'City': City, 'User': User}
+mapping_class = {'State': State, 'City': City, 'User': User, 'Place': Place}
 
 
 class DBStorage:
