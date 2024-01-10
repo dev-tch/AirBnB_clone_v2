@@ -12,8 +12,8 @@ def do_pack():
     """
         logic function
     """
-    if not os.path.exists("versions")
-    local("mkdir -p versions")
+    if not os.path.exists("versions"):
+        local("mkdir -p versions")
     tm = datetime.utcnow()
     arc_file = "versions/web_static_{}{}{}{}{}{}.tgz".format(
                                                             tm.year,
