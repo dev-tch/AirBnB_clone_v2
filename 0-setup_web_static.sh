@@ -16,7 +16,17 @@ if [ ! -d  "$dir2" ]; then
 fi
 
 # Create a fake HTML file
-echo "My Public First HTML!" > "$dir1\/index.html"
+html=\
+"
+<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>
+"
+echo  -e  "$html" > "$dir1/index.html"
 
 #  If the symbolic link already exists, it should be deleted
 if [ -h "$link_file" ]; then	
