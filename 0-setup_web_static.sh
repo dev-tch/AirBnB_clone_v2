@@ -44,12 +44,20 @@ sudo chown -R ubuntu:ubuntu /data/
 
 # update configuration 
 
-nginx_config="/etc/nginx/sites-available/default"
-
-sudo sed -i '/^\tlocation \/ {/a\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_config"
+nginx_default_config="/etc/nginx/sites-available/default"
+nginx_custom_config="/etc/nginx/sites-available/redirect_config"
+if [ -e "$nginx_custom_config" ]; then
+	sudo sed -i '/^\tlocation \/ {/a\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_custom_config"
+else
+	sudo sed -i '/^\tlocation \/ {/a\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_default_config"
+fi
 
 
 # reload the server nginx 
-
-sudo service nginx restart
+if [ "$(pgrep -c nginx)" -le 0 ]; then
+  sudo service nginx start
+else
+  # sudo -S service nginx restart <<< "ubuntu"
+  sudo service nginx restart
+fi
 
