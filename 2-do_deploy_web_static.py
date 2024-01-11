@@ -16,14 +16,15 @@ def do_deploy(archive_path):
     if not exists(archive_path):
         return False
     try:
-        # upload achive to my remote server
-        put(archive_path, "/tmp/")
         # get  the name of archive
         file_with_ext = archive_path.split("/")[-1]
         file_no_ext = file_with_ext.split(".")[0]
-        # uncompress the archive
+        # get src and path
         src_path = "/tmp/{}".format(file_with_ext)
         dest_path = "/data/web_static/releases/{}".format(file_no_ext)
+        # upload achive to my remote server
+        put(src_path)
+        # uncompress the archive
         run("tar -xzf {}  -C {}".format(src_path, dest_path))
         # delete achive
         run("rm {}".format(src_path))
