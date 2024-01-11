@@ -2,7 +2,7 @@
 """
  distributes an archive to your web servers, using the function do_deploy
 """
-from fabric.api import put, run
+from fabric.api import put, run, env
 from os.path import exists
 
 
