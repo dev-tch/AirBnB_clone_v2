@@ -47,9 +47,9 @@ sudo chown -R ubuntu:ubuntu /data/
 nginx_default_config="/etc/nginx/sites-available/default"
 nginx_custom_config="/etc/nginx/sites-available/redirect_config"
 if [ -e "$nginx_custom_config" ]; then
-	sudo sed -i '/^\tlocation \/ {/a\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_custom_config"
+	sudo sed -i '/^\s*server_name _;/a\\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_custom_config"
 else
-	sudo sed -i '/^\tlocation \/ {/a\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_default_config"
+	sudo sed -i '/^\s*server_name _;/a\\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}' "$nginx_default_config"
 fi
 
 
