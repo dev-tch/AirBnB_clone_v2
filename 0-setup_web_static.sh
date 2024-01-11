@@ -26,7 +26,7 @@ html=\
   </body>
 </html>
 "
-echo  -e  "$html" > "$dir1/index.html"
+sudo echo  -e  "$html" > "$dir1/index.html"
 
 #  If the symbolic link already exists, it should be deleted
 if [ -h "$link_file" ]; then	
