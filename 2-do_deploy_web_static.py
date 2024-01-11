@@ -23,7 +23,7 @@ def do_deploy(archive_path):
         file_no_ext = file_with_ext.split(".")[0]
         # uncompress the archive
         src_path = "/tmp/{}".format(file_with_ext)
-        dest_path = "/data/web_static/releases/{}/".format(file_no_ext)
+        dest_path = "/data/web_static/releases/{}".format(file_no_ext)
         run("tar -xzf {}  -C {}".format(src_path, dest_path))
         # delete achive
         run("rm {}".format(src_path))
