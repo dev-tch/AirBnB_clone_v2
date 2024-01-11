@@ -3,7 +3,7 @@
  distributes an archive to your web servers, using the function do_deploy
 """
 from fabric.api import put, run
-import os
+from os.path import exists
 
 
 env.hosts = ['34.201.164.31', '54.197.101.238']  # <IP web-01>, <IP web-02>
