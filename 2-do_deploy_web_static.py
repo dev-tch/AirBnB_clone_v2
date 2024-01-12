@@ -21,7 +21,7 @@ def do_deploy(archive_path):
         file_no_ext = file_with_ext.split(".")[0]
         # get src and path
         serv_file = "/tmp/{}".format(file_with_ext)
-        dir_unzip = "/data/web_static/releases/{}/".format(file_no_ext)
+        dir_unzip = "/data/web_static/releases/{}".format(file_no_ext)
         # upload achive to my remote server
         put(archive_path, "/tmp/")
         # create new directory
@@ -29,7 +29,7 @@ def do_deploy(archive_path):
         # uncompress the archive
         run("tar -xzf {}  -C {}".format(serv_file, dir_unzip))
         # move uncompressed files to dir_unzip
-        run("mv {}/web_static/* {}/".format(dir_unzip, dir_unzip))
+        run("mv {}/web_static/* {}".format(dir_unzip, dir_unzip))
         # remove folder web_static in dir_unzip
         run("rm -rf {}/web_static".format(dir_unzip))
         # delete symbolic link
