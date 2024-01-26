@@ -12,15 +12,16 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def get_hello_hbnb():
     """
-    return message 'hello HBNB!' 
+    return message 'hello HBNB!'
     when web server invoking router '/'
     """
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
 def get_hbnb():
     """
-    return message HBNB 
+    return message HBNB
     when web server invoking router '/hbnb'
     """
     return "HBNB"
