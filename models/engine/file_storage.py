@@ -61,3 +61,9 @@ class FileStorage:
                 if val is obj:
                     self.__objects.pop(key)
                     break
+ 
+    def close(self):
+        """
+        deserializing the JSON file to objects
+        """
+        self.reload()
