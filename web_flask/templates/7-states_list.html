@@ -6,8 +6,8 @@
 <body>
     <h1>States</h1>
     <ul>
-    {% for item in states %}
-    <li> go </li>
+    {% for obj in states %}
+    <li> {{obj.id}}: <B>{{obj.name}}</B></li>
     {% endfor %}
     </ul>
 </body>
