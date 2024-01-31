@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>HBNB</title>
-</head>
-<body>
-    {% if states %}	
-    <h1>States</h1>
-    <ul>
-        {% for state in states|sort(attribute='name') %}
-	<li>{{state.id}}: <b>{{state.name}}</b></li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% if stateObj  %}
-    <h1>State: {{stateObj.id}}</h1>
-    <h3>Cities:</h3>
-    <ul>
-       {% for city in stateObj.cities|sort(attribute='name') %}
-       <li>{{city.id}}: <b>{{city.name}}</b></li>
-       {% endfor %}
-    </ul>
-    {% endif %}
-</body>
+    <head>
+	    <title>HBNB</title>
+    </head>
+    <body>
+	    {% if states %}
+            <h1>States</h1>
+        	<ul>
+                {% for state in states|sort(attribute='name') %}
+            	    <li>{{state.id}}: <b>{{state.name}}</b></li>
+            	{% endfor %}
+        	</ul>
+        {% elif stateObj %}
+            <h1>State: {{stateObj.id}}</h1>
+            <h3>Cities:</h3>
+            <ul>
+                {% for city in stateObj.cities|sort(attribute='name') %}
+            	    <li>{{city.id}}: <b>{{city.name}}</b></li>
+            	{% endfor %}
+        	</ul>
+        {% else %}
+            <h1>Not found!</h1>
+        {% endif %}
+    </body>
 </html>
 
