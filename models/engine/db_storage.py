@@ -16,7 +16,7 @@ from os import getenv
 
 mapping_class = {
                     'State': State, 'City': City, 'User': User, 'Place': Place,
-                    'Review': Review
+                    'Review': Review, 'Amenity': Amenity
                 }
 
 
