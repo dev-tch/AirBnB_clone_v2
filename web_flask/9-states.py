@@ -29,7 +29,7 @@ def get_state_by_id(id):
         if state.id == id:
             stateObj = state
             break
-    return render_template('9-states.html', stateObj=stateObj)
+    return render_template('9-states.html', stateObj=stateObj, id=id)
 
 
 @app.teardown_appcontext
