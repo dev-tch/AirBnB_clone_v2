@@ -13,7 +13,7 @@
         	</ul>
         {% elif stateObj %}
             <h1>State: {{stateObj.name}}</h1>
-            <h3>Cities</h3>
+            <h3>Cities:</h3>
             <ul>
                 {% for city in stateObj.cities|sort(attribute='name') %}
             	    <li>{{city.id}}: <b>{{city.name}}</b></li>
